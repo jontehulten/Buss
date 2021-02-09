@@ -9,25 +9,98 @@ window.addEventListener("load", function () {
     var cards = document.querySelectorAll("img");
     fillDeck();
     ShuffleDeck();
+    placeCards(cards)
     
     for(let i = 0; i < cards.length; i++){
         cards[i].addEventListener("click", function(e){
-            console.log(e.target.nodeName);
             if( e.target.nodeName === "IMG") {
-                ShowCard(e);  
+                CheckCard(e);  
             }
         });
     }
 });
 
-function ShowCard(e){
+function CheckCard(e){
+
+    /* Issues
+    - Check Row (Ska bara gå att vända rad användaren är i) 
+    - Check value (klätt eller inte klätt)
+    - New card should be hidden
+    */
+    let card = e.target;
+    let rows = document.querySelectorAll(".row");
+    if(rowCounter === 1){
+
+        let childrens = rows[3].children;
+
+        for(let i = 0; i < rows[3].children.length; i++){
+            
+            if(childrens[i] === e.target.parentNode){
+                console.log("rätt rad");
+                rowCounter++;
+                
+                card.src = deck[deckCounter]; 
+                deckCounter++;
+            }
+        }
+        
+    }
+    if(rowCounter === 2){
+
+        let childrens = rows[2].children;
+
+        for(let i = 0; i < rows[2].children.length; i++){
+            
+            if(childrens[i] === e.target.parentNode){
+                console.log("rätt rad");
+                rowCounter++;
+                
+                card.src = deck[deckCounter]; 
+                deckCounter++;
+            }
+        }
+        
+    }
+    if(rowCounter === 3){
+
+        let childrens = rows[1].children;
+
+        for(let i = 0; i < rows[1].children.length; i++){
+            
+            if(childrens[i] === e.target.parentNode){
+                console.log("rätt rad");
+                rowCounter++; 
+                
+                card.src = deck[deckCounter]; 
+                deckCounter++;
+            }
+        }
+        
+    }
+    if(rowCounter === 4){
+
+        let childrens = rows[0].children;
+
+        for(let i = 0; i < rows[0].children.length; i++){
+            
+            if(childrens[i] === e.target.parentNode){
+                console.log("rätt rad");
+                rowCounter = 1; 
+                
+                card.src = deck[deckCounter]; 
+                deckCounter++;
+            }
+        }
+        
+    }
+    /*
     let card = e.target;
     card.src = deck[deckCounter]; 
     deckCounter++;
     
     if(deckCounter === 51){
         deckCounter = 0;
-    }
+    }*/
 
 }
 function ShuffleDeck(){
@@ -70,6 +143,15 @@ function fillDeck(){
         searchPath += j + ".png";
         deck.push(searchPath);
         }
+    }
+}
+function placeCards(cards){
+
+    //Hidden src på kort, vart lägger vi den?
+    for(let i=1; i<11; i++){
+        let HiddenValue = document.getElementById("card" + i);
+        HiddenValue.value = deck[deckCounter];
+        deckCounter ++;
     }
 }
 
