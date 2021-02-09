@@ -3,13 +3,14 @@
 var rowCounter = 1;
 var deckCounter = 0;
 var deck = [];
+var message = document.querySelector(".message")
 
 window.addEventListener("load", function () {
 
     var cards = document.querySelectorAll("img");
     fillDeck();
     ShuffleDeck();
-    placeCards(cards)
+    placeStarterCards();
     
     for(let i = 0; i < cards.length; i++){
         cards[i].addEventListener("click", function(e){
@@ -22,11 +23,7 @@ window.addEventListener("load", function () {
 
 function CheckCard(e){
 
-    /* Issues
-    - Check Row (Ska bara gå att vända rad användaren är i) 
-    - Check value (klätt eller inte klätt)
-    - New card should be hidden
-    */
+    message.textContent = "";
     let card = e.target;
     let rows = document.querySelectorAll(".row");
     if(rowCounter === 1){
@@ -36,11 +33,19 @@ function CheckCard(e){
         for(let i = 0; i < rows[3].children.length; i++){
             
             if(childrens[i] === e.target.parentNode){
-                console.log("rätt rad");
                 rowCounter++;
                 
-                card.src = deck[deckCounter]; 
-                deckCounter++;
+                let hiddenValue = document.getElementById(e.target.parentNode.id);
+                card.src = hiddenValue.value;
+                let faceCard = card.src.split(/[-,.]/);
+
+                if(faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 ||faceCard[1] == 12 ||faceCard[1] == 13){
+                    rowCounter = 1;
+                    message.textContent = "drick 2";
+                    turnAllCards();
+
+                }
+                placeNewCardFromDeck(hiddenValue);
             }
         }
         
@@ -52,11 +57,19 @@ function CheckCard(e){
         for(let i = 0; i < rows[2].children.length; i++){
             
             if(childrens[i] === e.target.parentNode){
-                console.log("rätt rad");
                 rowCounter++;
                 
-                card.src = deck[deckCounter]; 
-                deckCounter++;
+                let hiddenValue = document.getElementById(e.target.parentNode.id);
+                card.src = hiddenValue.value;
+                let faceCard = card.src.split(/[-,.]/);
+
+                if(faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 ||faceCard[1] == 12 ||faceCard[1] == 13){
+                    rowCounter = 1;
+                    message.textContent = "drick 4";
+                    turnAllCards();
+
+                }
+                placeNewCardFromDeck(hiddenValue);
             }
         }
         
@@ -68,11 +81,19 @@ function CheckCard(e){
         for(let i = 0; i < rows[1].children.length; i++){
             
             if(childrens[i] === e.target.parentNode){
-                console.log("rätt rad");
                 rowCounter++; 
                 
-                card.src = deck[deckCounter]; 
-                deckCounter++;
+                let hiddenValue = document.getElementById(e.target.parentNode.id);
+                card.src = hiddenValue.value;
+                let faceCard = card.src.split(/[-,.]/);
+
+                if(faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 ||faceCard[1] == 12 ||faceCard[1] == 13){
+                    rowCounter = 1;
+                    message.textContent = "drick 6";
+                    turnAllCards();
+
+                }
+                placeNewCardFromDeck(hiddenValue);
             }
         }
         
@@ -84,25 +105,32 @@ function CheckCard(e){
         for(let i = 0; i < rows[0].children.length; i++){
             
             if(childrens[i] === e.target.parentNode){
-                console.log("rätt rad");
                 rowCounter = 1; 
                 
-                card.src = deck[deckCounter]; 
-                deckCounter++;
+                let hiddenValue = document.getElementById(e.target.parentNode.id);
+                card.src = hiddenValue.value;
+                let faceCard = card.src.split(/[-,.]/);
+
+                if(faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 ||faceCard[1] == 12 ||faceCard[1] == 13){
+                    rowCounter = 1;
+                    message.textContent = "drick 8";
+                    turnAllCards();
+
+                }
+                else{
+                    message.textContent = "Du vann bussresan!"; 
+                }
+                placeNewCardFromDeck(hiddenValue);
             }
         }
         
     }
-    /*
-    let card = e.target;
-    card.src = deck[deckCounter]; 
-    deckCounter++;
     
     if(deckCounter === 51){
         deckCounter = 0;
-    }*/
-
+    }
 }
+
 function ShuffleDeck(){
  
     /* suffle arrays with strings stackOverflow
@@ -123,6 +151,7 @@ function ShuffleDeck(){
     deck[randomIndex] = temporaryValue;
   }
 }
+
 function fillDeck(){
 
     for(let i=1; i<5; i++){
@@ -145,13 +174,32 @@ function fillDeck(){
         }
     }
 }
-function placeCards(cards){
 
-    //Hidden src på kort, vart lägger vi den?
+function placeStarterCards() {
+
+    //Med hidden value kommer det att bli möjligt att fuska?
+
     for(let i=1; i<11; i++){
-        let HiddenValue = document.getElementById("card" + i);
-        HiddenValue.value = deck[deckCounter];
+        let hiddenValue = document.getElementById("card" + i);
+        hiddenValue.value = deck[deckCounter];
         deckCounter ++;
+        console.log(hiddenValue.value);
     }
+}
+
+function placeNewCardFromDeck(card) {
+
+    card.value = deck[deckCounter];
+    deckCounter++
+}
+
+function turnAllCards() {
+    let cards = document.querySelectorAll("img");
+    setTimeout(function(){
+
+        for(let i=0; i<10; i++){
+           cards[i].src = "cards/card-game-back.png";
+        }
+    }, 1000);
 }
 
