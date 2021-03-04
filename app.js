@@ -53,12 +53,10 @@ function CheckCard(e) {
                 rowCounter++;
 
                 let hiddenValue = document.getElementById(e.target.parentNode.id);
-
                 //Funktion för att byta src på kortet med animation
                 revealCard(card, hiddenValue);
                 playCardSound();
-
-                let faceCard = card.src.split(/[-,.]/);
+                let faceCard = hiddenValue.value.split(/[-,.]/);
 
                 if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
@@ -86,7 +84,7 @@ function CheckCard(e) {
                 revealCard(card, hiddenValue);
                 playCardSound();
 
-                let faceCard = card.src.split(/[-,.]/);
+                let faceCard = hiddenValue.value.split(/[-,.]/);
 
                 if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
@@ -114,7 +112,7 @@ function CheckCard(e) {
                 revealCard(card, hiddenValue);
                 playCardSound();
 
-                let faceCard = card.src.split(/[-,.]/);
+                let faceCard = hiddenValue.value.split(/[-,.]/);
 
                 if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
@@ -141,8 +139,7 @@ function CheckCard(e) {
                 //Funktion för att byta src på kortet med animation
                 revealCard(card, hiddenValue);
                 playCardSound();
-
-                let faceCard = card.src.split(/[-,.]/);
+                let faceCard = hiddenValue.value.split(/[-,.]/);
 
                 if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
@@ -216,7 +213,6 @@ function placeStarterCards() {
         let hiddenValue = document.getElementById("card" + i);
         hiddenValue.value = deck[deckCounter];
         deckCounter++;
-        console.log(hiddenValue.value);
     }
 }
 
@@ -238,9 +234,9 @@ function turnAllCards() {
 
 
 function revealCard(card, hiddenValue) {
+    card.src = hiddenValue.value; //byt src
     spinCardHide(card); //Kort roterar bort
     setTimeout(function () { //Vänta 150 sekunder (så lång tid det tar för kortet att rotera bort)
-        card.src = hiddenValue.value; //byt src
         spinCardShow(card); // snurra tillbaka kortet
     }, 150);
 }
