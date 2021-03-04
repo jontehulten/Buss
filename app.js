@@ -60,7 +60,7 @@ function CheckCard(e) {
 
                 if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
-                    message.textContent = "drick 2";
+                    message.textContent = "Skål! Drick 3";
                     turnAllCards();
 
                 }
@@ -88,7 +88,7 @@ function CheckCard(e) {
 
                 if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
-                    message.textContent = "drick 4";
+                    message.textContent = "Skål! Drick 6";
                     turnAllCards();
 
                 }
@@ -116,7 +116,7 @@ function CheckCard(e) {
 
                 if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
-                    message.textContent = "drick 6";
+                    message.textContent = "Skål! Drick 9";
                     turnAllCards();
 
                 }
@@ -143,12 +143,13 @@ function CheckCard(e) {
 
                 if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
-                    message.textContent = "drick 8";
+                    message.textContent = "Skål! Drick 12";
                     turnAllCards();
 
                 }
                 else {
-                    message.textContent = "Du vann bussresan!";
+                    message.textContent = "Grattis, Du vann bussresan!";
+                    turnAllCards();
                 }
                 placeNewCardFromDeck(hiddenValue);
             }
