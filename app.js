@@ -4,6 +4,7 @@ var rowCounter = 1;
 var deckCounter = 0;
 var deck = [];
 var message = document.querySelector(".message");
+var totalsips = 0;
 
 //Animationsvariabler
 let delay = 100; //Hur lång tid det tar innan animationerna börjar (ms)
@@ -60,7 +61,8 @@ function CheckCard(e) {
 
                 if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
-                    message.textContent = "Skål! Drick 3";
+                    message.textContent = "Skål! Drick 2";
+                    totalsips += 2;
                     turnAllCards();
 
                 }
@@ -88,7 +90,8 @@ function CheckCard(e) {
 
                 if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
-                    message.textContent = "Skål! Drick 6";
+                    message.textContent = "Skål! Drick 4";
+                    totalsips += 4;
                     turnAllCards();
 
                 }
@@ -116,7 +119,8 @@ function CheckCard(e) {
 
                 if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
-                    message.textContent = "Skål! Drick 9";
+                    message.textContent = "Skål! Drick 6";
+                    totalsips += 6;
                     turnAllCards();
 
                 }
@@ -143,13 +147,17 @@ function CheckCard(e) {
 
                 if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
-                    message.textContent = "Skål! Drick 12";
+                    message.textContent = "Skål! Drick 8";
+                    totalsips += 8;
                     turnAllCards();
 
                 }
                 else {
-                    message.textContent = "Grattis, Du vann bussresan!";
+                    message.innerHTML = "Grattis, Du vann bussresan! <br> Totalt behövde du dricka: " + totalsips + " klunkar";
+                    totalsips = 0;
                     turnAllCards();
+                    ShuffleDeck();
+                    placeStarterCards();
                 }
                 placeNewCardFromDeck(hiddenValue);
             }
