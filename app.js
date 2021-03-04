@@ -11,6 +11,10 @@ let delayInterval = 100; //Hur lång delay mellan varje korts animation (ms)
 let xStart = 800; //Startposition i x-led (%)
 let yStart = 80; //Startposition i y-led (%)
 
+//Audio
+var sounds = ["cs1", "cs2", "cs3", "cs4", "cs5", "cs6"]; //array med namn på ljudfiler
+var cardAudio = document.getElementById("cardAudio");
+
 window.addEventListener("load", function () {
 
     var cards = document.querySelectorAll("img");
@@ -52,6 +56,7 @@ function CheckCard(e) {
 
                 //Funktion för att byta src på kortet med animation
                 revealCard(card, hiddenValue);
+                playCardSound();
 
                 let faceCard = card.src.split(/[-,.]/);
 
@@ -79,6 +84,7 @@ function CheckCard(e) {
 
                 //Funktion för att byta src på kortet med animation
                 revealCard(card, hiddenValue);
+                playCardSound();
 
                 let faceCard = card.src.split(/[-,.]/);
 
@@ -106,6 +112,7 @@ function CheckCard(e) {
 
                 //Funktion för att byta src på kortet med animation
                 revealCard(card, hiddenValue);
+                playCardSound();
 
                 let faceCard = card.src.split(/[-,.]/);
 
@@ -133,6 +140,7 @@ function CheckCard(e) {
 
                 //Funktion för att byta src på kortet med animation
                 revealCard(card, hiddenValue);
+                playCardSound();
 
                 let faceCard = card.src.split(/[-,.]/);
 
@@ -235,6 +243,12 @@ function revealCard(card, hiddenValue) {
         card.src = hiddenValue.value; //byt src
         spinCardShow(card); // snurra tillbaka kortet
     }, 150);
+}
+
+function playCardSound() {
+    let randomPosition = Math.floor(Math.random() * 6);
+    cardAudio.setAttribute("src", "audio/" + sounds[randomPosition] + ".mp3");
+    cardAudio.play();
 }
 
 //Animationsfunktioner
