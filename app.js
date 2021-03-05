@@ -7,10 +7,10 @@ var message = document.querySelector(".message");
 var totalsips = 0;
 
 //Animationsvariabler
-let delay = 100; //Hur lång tid det tar innan animationerna börjar (ms)
-let delayInterval = 100; //Hur lång delay mellan varje korts animation (ms)
-let xStart = 800; //Startposition i x-led (%)
-let yStart = 80; //Startposition i y-led (%)
+var delay = 100; //Hur lång tid det tar innan animationerna börjar (ms)
+var delayInterval = 100; //Hur lång delay mellan varje korts animation (ms)
+var xStart = 800; //Startposition i x-led (%)
+var yStart = 80; //Startposition i y-led (%)
 
 //Audio
 var sounds = ["cs1", "cs2", "cs3", "cs4", "cs5", "cs6"]; //array med namn på ljudfiler
@@ -18,17 +18,11 @@ var cardAudio = document.getElementById("cardAudio");
 
 window.addEventListener("load", function () {
 
-    var cards = document.querySelectorAll("img");
+    let cards = document.querySelectorAll("img");
 
     fillDeck();
     ShuffleDeck();
     placeStarterCards();
-
-    cards.forEach(card => {
-        card.style.opacity = 0;
-        animateIn(card, delay, xStart, yStart);
-        delay += delayInterval;
-    });
 
     for (let i = 0; i < cards.length; i++) {
         cards[i].addEventListener("click", function (e) {
@@ -157,6 +151,7 @@ function CheckCard(e) {
                     totalsips = 0;
                     turnAllCards();
                     ShuffleDeck();
+                    TakeCardsAway();
                     placeStarterCards();
                 }
                 placeNewCardFromDeck(hiddenValue);
@@ -215,6 +210,13 @@ function fillDeck() {
 }
 
 function placeStarterCards() {
+    let cards = document.querySelectorAll("img");
+    cards.forEach(card => {
+        card.style.visibility='visible'; 
+        card.style.opacity = 0;
+        animateIn(card, delay, xStart, yStart);
+        delay += delayInterval;
+    });
 
     //Med hidden value kommer det att bli möjligt att fuska?
 
@@ -239,6 +241,16 @@ function turnAllCards() {
             cards[i].src = "cards/card-game-back.png";
         }
     }, 1000);
+}
+
+function TakeCardsAway() {
+
+    // *Animation som drar iväg korten
+
+    let cards = document.querySelectorAll("img");
+    cards.forEach(card => { 
+        card.style.visibility='hidden';
+    });
 }
 
 
