@@ -53,13 +53,13 @@ function CheckCard(e) {
                 playCardSound();
                 let faceCard = hiddenValue.value.split(/[-,.]/);
 
-                /*if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
+                if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
                     message.textContent = "Skål! Drick 2";
                     totalsips += 2;
                     turnAllCards();
 
-                }*/
+                }
                 placeNewCardFromDeck(hiddenValue);
             }
         }
@@ -82,13 +82,13 @@ function CheckCard(e) {
 
                 let faceCard = hiddenValue.value.split(/[-,.]/);
 
-                /*if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
+                if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
                     message.textContent = "Skål! Drick 4";
                     totalsips += 4;
                     turnAllCards();
 
-                }*/
+                }
                 placeNewCardFromDeck(hiddenValue);
             }
         }
@@ -111,13 +111,13 @@ function CheckCard(e) {
 
                 let faceCard = hiddenValue.value.split(/[-,.]/);
 
-                /*if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
+                if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
                     message.textContent = "Skål! Drick 6";
                     totalsips += 6;
                     turnAllCards();
 
-                }*/
+                }
                 placeNewCardFromDeck(hiddenValue);
             }
         }
@@ -139,7 +139,7 @@ function CheckCard(e) {
                 playCardSound();
                 let faceCard = hiddenValue.value.split(/[-,.]/);
 
-                if (faceCard[1] == 1 /*|| faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13*/) {
+                if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
                     message.textContent = "Skål! Drick 8";
                     totalsips += 8;
@@ -158,7 +158,7 @@ function CheckCard(e) {
                     }, 2000);
                     setTimeout(function () { //timeout innan nya kort placeras
                         placeStarterCards();
-                    }, 3000);
+                    }, 3600);
                 }
                 placeNewCardFromDeck(hiddenValue);
             }
@@ -242,12 +242,28 @@ function placeNewCardFromDeck(card) {
 
 function turnAllCards() {
     let cards = document.querySelectorAll("img");
+    let turnedCards = [];
     setTimeout(function () {
+        cards.forEach(card => {
+            if (card.getAttribute("src") != "cards/card-game-back.png") {
+                spinCardHide(card);
+                turnedCards.push(card);
+            }
+        });
+    }, 1000);
 
+
+    setTimeout(function () {
         for (let i = 0; i < 10; i++) {
             cards[i].src = "cards/card-game-back.png";
         }
-    }, 1000);
+    }, 1200);
+
+    setTimeout(function () {
+        turnedCards.forEach(card => {
+            spinCardShow(card);
+        });
+    }, 1300);
 }
 
 function TakeCardsAway() {
@@ -308,14 +324,16 @@ function animateOut(card, delay, xEnd, yEnd) {
 
     let keyframes = [
         {
-            opacity: 1,
             transform:
-                "rotate(0deg) translateX(0%) translateY(0%)"
+                "rotate(0deg) translateX(0%) translateY(0%)",
+            opacity: 1,
+
         },
         {
-            opacity: 0,
             transform:
-                "rotate(-25deg) translateX(" + xEnd + "%) translateY(" + yEnd + "%)"
+                "rotate(-25deg) translateX(" + xEnd + "%) translateY(" + yEnd + "%)",
+            opacity: 0,
+
         },
     ];
 
