@@ -53,13 +53,13 @@ function CheckCard(e) {
                 playCardSound();
                 let faceCard = hiddenValue.value.split(/[-,.]/);
 
-                if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
+                /*if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
                     message.textContent = "Skål! Drick 2";
                     totalsips += 2;
                     turnAllCards();
 
-                }
+                }*/
                 placeNewCardFromDeck(hiddenValue);
             }
         }
@@ -82,13 +82,13 @@ function CheckCard(e) {
 
                 let faceCard = hiddenValue.value.split(/[-,.]/);
 
-                if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
+                /*if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
                     message.textContent = "Skål! Drick 4";
                     totalsips += 4;
                     turnAllCards();
 
-                }
+                }*/
                 placeNewCardFromDeck(hiddenValue);
             }
         }
@@ -111,13 +111,13 @@ function CheckCard(e) {
 
                 let faceCard = hiddenValue.value.split(/[-,.]/);
 
-                if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
+                /*if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
                     message.textContent = "Skål! Drick 6";
                     totalsips += 6;
                     turnAllCards();
 
-                }
+                }*/
                 placeNewCardFromDeck(hiddenValue);
             }
         }
@@ -139,7 +139,7 @@ function CheckCard(e) {
                 playCardSound();
                 let faceCard = hiddenValue.value.split(/[-,.]/);
 
-                if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
+                if (faceCard[1] == 1 /*|| faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13*/) {
                     rowCounter = 1;
                     message.textContent = "Skål! Drick 8";
                     totalsips += 8;
@@ -149,10 +149,16 @@ function CheckCard(e) {
                 else {
                     message.innerHTML = "Grattis, Du vann bussresan! <br> Totalt behövde du dricka: " + totalsips + " klunkar";
                     totalsips = 0;
-                    turnAllCards();
-                    ShuffleDeck();
+                    //turnAllCards();
+                    //ShuffleDeck();
                     TakeCardsAway();
-                    placeStarterCards();
+                    setTimeout(function () { //timeout innan nya kort placeras
+                        turnAllCards();
+                        ShuffleDeck();
+                    }, 2000);
+                    setTimeout(function () { //timeout innan nya kort placeras
+                        placeStarterCards();
+                    }, 3000);
                 }
                 placeNewCardFromDeck(hiddenValue);
             }
@@ -211,8 +217,9 @@ function fillDeck() {
 
 function placeStarterCards() {
     let cards = document.querySelectorAll("img");
+    delay = 100;
     cards.forEach(card => {
-        card.style.visibility='visible'; 
+        card.style.visibility = 'visible';
         card.style.opacity = 0;
         animateIn(card, delay, xStart, yStart);
         delay += delayInterval;
@@ -246,10 +253,12 @@ function turnAllCards() {
 function TakeCardsAway() {
 
     // *Animation som drar iväg korten
-
     let cards = document.querySelectorAll("img");
-    cards.forEach(card => { 
-        card.style.visibility='hidden';
+    delay = 1500;
+    cards.forEach(card => {
+        //card.style.visibility = 'hidden';
+        animateOut(card, delay, -500, -100);
+        delay += 100;
     });
 }
 
@@ -281,6 +290,32 @@ function animateIn(card, delay, xStart, yStart) {
             transform:
                 "rotate(0deg) translateX(0%) translateY(0%)",
             opacity: 1,
+        },
+    ];
+
+    let options = {
+        duration: 1000,
+        iterations: 1,
+        fill: "forwards",
+        easing: "ease",
+        delay: delay
+    };
+
+    card.animate(keyframes, options)
+}
+
+function animateOut(card, delay, xEnd, yEnd) {
+
+    let keyframes = [
+        {
+            opacity: 1,
+            transform:
+                "rotate(0deg) translateX(0%) translateY(0%)"
+        },
+        {
+            opacity: 0,
+            transform:
+                "rotate(-25deg) translateX(" + xEnd + "%) translateY(" + yEnd + "%)"
         },
     ];
 
