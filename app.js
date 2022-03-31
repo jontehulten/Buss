@@ -53,7 +53,7 @@ function CheckCard(e) {
                 playCardSound();
                 let faceCard = hiddenValue.value.split(/[-,.]/);
 
-                if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
+                if (faceCard[1] == 1 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
                     message.textContent = "Skål! Drick 2";
                     totalsips += 2;
@@ -82,7 +82,7 @@ function CheckCard(e) {
 
                 let faceCard = hiddenValue.value.split(/[-,.]/);
 
-                if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
+                if (faceCard[1] == 1 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
                     message.textContent = "Skål! Drick 4";
                     totalsips += 4;
@@ -111,7 +111,7 @@ function CheckCard(e) {
 
                 let faceCard = hiddenValue.value.split(/[-,.]/);
 
-                if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
+                if (faceCard[1] == 1 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
                     message.textContent = "Skål! Drick 6";
                     totalsips += 6;
@@ -139,7 +139,7 @@ function CheckCard(e) {
                 playCardSound();
                 let faceCard = hiddenValue.value.split(/[-,.]/);
 
-                if (faceCard[1] == 1 || faceCard[1] == 10 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
+                if (faceCard[1] == 1 || faceCard[1] == 11 || faceCard[1] == 12 || faceCard[1] == 13) {
                     rowCounter = 1;
                     message.textContent = "Skål! Drick 8";
                     totalsips += 8;
